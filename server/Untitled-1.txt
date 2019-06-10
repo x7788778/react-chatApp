@@ -1,0 +1,152 @@
+  /**
+   * Definition for singly-linked list.
+   * function ListNode(val) {
+   *     this.val = val;
+   *     this.next = null;
+   * }
+   */
+  /**
+   * @param {ListNode} head
+   * @param {number} m
+   * @param {number} n
+   * @return {ListNode}
+   */
+  var reverseBetween = function(head, m, n) {
+    if(head==null || head.next==null){
+        return head
+    };
+    if(m === n ) {
+      return head
+    };
+    if((n-m+1) === getLinkLength(head)) {
+      return reverseList(head)
+    }
+
+    let rest = head
+    if(rest != null) {
+      for (let i = 1; i < n; i++) {
+        rest = rest.next
+    };
+    }
+    
+    let Nnode = rest;
+    rest = newLinkList(rest);//保存n以后的链表
+    Nnode.next = null; //head砍掉rest
+    let Mnode = head;
+    
+    for (let i = 1; i < m; i++) {
+        Mnode = Mnode.next
+    };//拿到m链表
+    
+    let newMnode = newLinkList(Mnode)
+    let rllMiddle = reverseList(newMnode);
+    if(m===1){
+      let pnode = rllMiddle
+      while(pnode.next){
+        pnode = pnode.next
+      }
+      pnode.next = rest.next
+      return rllMiddle
+    }
+
+    head.next = rllMiddle;
+    let pnode = head
+    while(pnode.next){
+      pnode = pnode.next
+    }
+    pnode.next = rest.next
+    return head
+  };
+
+  var reverseList = function(head) {
+    if(head == null || head.next == null) {
+    return head    
+  }
+    let pre = null
+    let current = head
+    let nextNode = head.next
+    while(current.next != null){
+        current.next = pre
+        pre = current
+        current = nextNode
+        nextNode = nextNode.next
+    }
+  current.next = pre
+    return current
+  };  
+
+  function newLinkList(link) {
+    return JSON.parse(JSON.stringify(link))
+  }
+
+
+  var getLinkLength = function(node) {
+    if(node && node.next == null) {
+      return 1
+    } 
+    var count = 1
+    var pnode = node
+    while(pnode.next){
+      pnode = pnode.next
+      count++
+    }
+    return count
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  var reverseBetween = function(head, m, n) {
+    let dummy = new ListNode(-1);
+    dummy.next = head;
+    let pre = dummy;
+    for (let i = 0; i < m-1; i++) {
+        pre = pre.next;
+    }
+    let revHead = pre.next, then = revHead.next;
+    for (let i = 0; i < n-m; i++){
+        revHead.next = then.next;
+        then.next = pre.next;
+        pre.next = then;
+        then = revHead.next;
+    }
+    return dummy.next;
+};
+
+
+/**
+ * @param {ListNode} head
+ * @param {number} m
+ * @param {number} n
+ * @return {ListNode}
+ */
+var reverseBetween = function(head, m, n) {
+  let dummy = new ListNode(-1);
+  dummy.next = head;
+  let pre = dummy;
+  for (let i = 0; i < m-1; i++) {
+      pre = pre.next;
+  }
+  let revHead = pre.next, then = revHead.next;
+  for (let i = 0; i < n-m; i++){
+      revHead.next = then.next;
+      then.next = pre.next;
+      pre.next = then;
+      then = revHead.next;
+  }
+  return dummy.next;
+};

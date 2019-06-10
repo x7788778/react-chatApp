@@ -71,6 +71,8 @@ class Chat extends React.Component{
       return null
     }
     const chatid = getChatId(userid,this.props.user._id)//聊天id，
+    console.log(this.props,'chatprops')
+    debugger;
     const chatmsgs = this.props.chat.chatmsg.filter(v=>v.chatid === chatid)//usercard与当前聊天id是否匹配
 
     return(

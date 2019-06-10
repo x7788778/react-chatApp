@@ -49,6 +49,7 @@ export function user (state = initState, action) {
   // return state
 }
 
+//action creator
 function authSuccess(obj){ 
   const {passWord,...data} = obj //过滤掉password
   return {type:AUTH_SUCCESS, payload:data}//payload是啥 http的payload则是http自身的请求/响应体

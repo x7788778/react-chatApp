@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux'  //
-import  thunk from 'redux-thunk'
+import  thunk from 'redux-thunk' //redux中间件，解决redux异步获取状态。
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom' //都引出去了
 import App from './app'
@@ -15,12 +15,12 @@ import './index.css'
 
 
 const store = createStore(reducers, compose(
-  applyMiddleware(thunk),//将thunk中间件传进creatStore里面
+  applyMiddleware(thunk),
   window.devToolsExtension ? window.devToolsExtension() : f=>f
 ))
 
-
-ReactDOM.hydrate(
+const renderMonth = module.hot ? ReactDOM.render : ReactDOM.hydrate
+renderMonth(
   (<Provider store={store}>
     <BrowserRouter>
       <App></App>

@@ -1,4 +1,4 @@
-//boss信息页
+//完善信息页
 import React,{Component} from 'react'
 import {NavBar, InputItem, TextareaItem, Button, Radio, DatePicker, List} from 'antd-mobile'
 import AvatarSelector from '../../component/avatar-selector/avatar-selector'
